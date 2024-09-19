@@ -7,13 +7,13 @@ class Knight(threading.Thread):
 		super().__init__()
 		self.name = name
 		self.power = power
-		self.enemies = 100  # Изначально 100 врагов
+		self.enemies = 100
 		self.days = 0
 
 	def run(self):
 		print(f"{self.name}, на нас напали!")
 		while self.enemies > 0:
-			time.sleep(1)  # Пауза на 1 секунду, чтобы имитировать день битвы
+			time.sleep(1)
 			self.enemies -= self.power
 			self.days += 1
 
@@ -26,15 +26,16 @@ class Knight(threading.Thread):
 		print(f"{self.name} одержал победу спустя {self.days} день(дня)!")
 
 
+first_knight = Knight('Sir Lancelot', 10)
+second_knight = Knight("Sir Galahad", 20)
+# Запуск потоков и остановка текущего
+# Вывод строки об окончании сражения
 
-knight1 = Knight("Рыцарь Артур", 30)
-knight2 = Knight("Рыцарь Ланселот", 20)
+first_knight.start()
+second_knight.start()
 
-knight1.start()
-knight2.start()
 
-# Ожидаем завершения обоих потоков
-knight1.join()
-knight2.join()
+first_knight.join()
+second_knight.join()
 
 print("Битвы окончены!")
