@@ -1,30 +1,20 @@
-calls = 0
-def count_calls():
-	global calls
-	calls += 1
+def send_email(message, recipient, sender = "university.@helpgmail.com"):
 
-def string_info(string):
-	count_calls()
-	lens_ = len(string)
-	upper_ = string.upper()
-	lower_ = string.lower()
-	return (lens_, upper_, lower_)
-def is_contains(string, list_to_search):
-	count_calls()
-	string = string.lower()
-	list_ = []
-	for i in list_to_search:
-		i = i.lower()
-		list_.append(i)
-
-	if string in list_:
-		return True
+	if ((not ("@" in recipient and recipient.endswith((".com",".ru", ".net")))) or
+			(not ("@" in sender and sender.endswith((".com",".ru", ".net"))))):
+		print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
+	elif sender == recipient:
+		print("Нельзя отправить письмо самому себе!")
+	elif sender == "university.@helpgmail.com":
+		print(f"Письмо успешно отправлено с адреса {sender} на адрес {recipient}")
 	else:
-		return False
+		print(f"НЕСТАНДАРТНЫЙ ОТПРАВИТЕЛЬ! Письмо отправлено с адреса {sender} на адрес {recipient}")
 
-print(string_info('Capybara'))
-print(string_info('Armageddon'))
-print(is_contains('Urban', ['ban', 'BaNaN', 'urBAN']))  # Urban ~ urBAN
-print(is_contains('cycle', ['recycling', 'cyclic']))  # No matches
-print(calls)
-#
+
+
+send_email('Это сообщение для проверки связи', 'vasyok1337@gmail.com')
+send_email('Вы видите это сообщение как лучший студент курса!', 'urban.fan@mail.ru', sender='urban.info@gmail.com')
+send_email('Пожалуйста, исправьте задание', 'urban.student@mail.ru', sender='urban.teacher@mail.uk')
+send_email('Напоминаю самому себе о вебинаре', 'urban.teacher@mail.ru', sender='urban.teacher@mail.ru')
+
+
